@@ -19,6 +19,11 @@ public class RabbitmqTestProducerApplication implements CommandLineRunner {
      @Autowired
 	 private EmployeeJsonProducer employeeJsonProducer;
 
+	@Autowired
+	private HumResourceJsonProducer humResourceJsonProducer;
+
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(RabbitmqTestProducerApplication.class, args);
 	}
@@ -32,6 +37,14 @@ public class RabbitmqTestProducerApplication implements CommandLineRunner {
 			employeeJsonProducer.sendMessage(e);
 
 		}
+
+		for(int i = 0; i < 5; i++){
+			Employee e = new Employee("empid " + i , "Employeename " + i , new Date());
+			humResourceJsonProducer.sendMessage(e);
+
+		}
+
+
 	}
 }
 
