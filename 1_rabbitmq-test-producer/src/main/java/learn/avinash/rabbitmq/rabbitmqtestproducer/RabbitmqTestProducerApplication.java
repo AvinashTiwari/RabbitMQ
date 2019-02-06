@@ -70,7 +70,8 @@ public class RabbitmqTestProducerApplication implements CommandLineRunner {
 			// type from array, get from list, index 0-2
 			p.setType(TYPES.get(i % TYPES.size()));
 
-			pictureProducer.send(p);
+			//pictureProducer.send(p);
+			pictureProducer.sendMessage(p);
 		}
 
 
