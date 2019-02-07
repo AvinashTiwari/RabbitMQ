@@ -1,6 +1,5 @@
 package learn.avinash.rabbitmq.rabbitmqtestproducer;
 
-import learn.avinash.rabbitmq.rabbitmqtestproducer.enitity.Employee;
 import learn.avinash.rabbitmq.rabbitmqtestproducer.enitity.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -29,6 +27,9 @@ public class RabbitmqTestProducerApplication implements CommandLineRunner {
 	@Autowired
 	private PictureProducer pictureProducer;
 
+	@Autowired
+	private MyPictureProducer mypictureProducer;
+
 	private final List<String> SOURCES =  Arrays.asList("mobile", "web");
 
 	// picture valid types
@@ -43,6 +44,7 @@ public class RabbitmqTestProducerApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		/*
 		helloRabbitProducer.sendHello("Avinash "  + Math.random());
 
 		for(int i = 0; i < 5; i++){
@@ -72,6 +74,22 @@ public class RabbitmqTestProducerApplication implements CommandLineRunner {
 
 			//pictureProducer.send(p);
 			pictureProducer.sendMessage(p);
+		}*/
+
+		for (int i = 0; i < 1; i++) {
+			Picture p = new Picture();
+			p.setName("Picture" + i);
+
+			// random size between 9001-9999
+			p.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
+
+			// source from array, get from list, index 0-1
+			p.setSource(SOURCES.get(i % SOURCES.size()));
+
+			// type from array, get from list, index 0-2
+			p.setType(TYPES.get(i % TYPES.size()));
+
+			mypictureProducer.sendMessage(p);
 		}
 
 
