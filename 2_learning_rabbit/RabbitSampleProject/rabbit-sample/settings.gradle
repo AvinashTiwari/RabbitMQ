@@ -1,0 +1,4 @@
+rootProject.name = 'rabbit-sample'
+includeFlat '1-rabbit-producer'
+includeFlat '1-rabbit-consumer'
+
